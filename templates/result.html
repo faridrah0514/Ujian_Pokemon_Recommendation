@@ -3,32 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pokemon Recommendation</title>
 </head>
-<body>
+<body style="background-image: url('https://cameronscookware.com/wp-content/uploads/2019/12/pokemon-pixel-background-unique-pokemon-clouds-pixel-art-desktop-background-combination-of-pokemon-pixel-background.png');">
     <!-- ini hasilnya loh ya -->
-    <h2>Pokemon Favorit Anda</h2>
-    hello {{ data['nama_pokemon'] }}
-    <br>
-    <!-- gambar {{ data['gambar_pokemon'] }} -->
-    <img src='{{ data['gambar_pokemon'] }}' alt="">
-    <h2>Rekomendasi Pokemon</h2>
+    <h2 style="background-color: antiquewhite; font-family: Arial, Helvetica, sans-serif;">Pokemon Favorit Anda</h2>
+    <div style="background-color: hsl(0,100%,90%); padding: 10px;" >
+        
+        <!-- hello {{ data['Name'] }} -->
+        <br>
+        <!-- gambar {{ data['gambar_pokemon'] }} -->
+        <img src='{{ data['Gambar'] }}' alt="">
+        <br>
+        <p>{{ data['Name'] }}  | {{ data['Type 1'] }} | {{ data['Generation'] }} | {{ data['Legendary'] }} </p>
+    </div>
+
+
+    <h2 style="">Rekomendasi Pokemon</h2>
     {% for pokemon in df%}
-        <hr>
+    <div style="background-color: beige;">
         <img src={{ pokemon['Gambar'] }} alt="">
-        {{ pokemon['Name'] }}
         <br>
-        {{ pokemon['Type 1'] }}
-        <br>
-        {{ pokemon['Generation'] }}
-        <br>
-        {{ pokemon['Legendary'] }}
-        <br>
-        <!-- dct['Name'] = df_recomm.iloc[i]['Name']
-        dct['Type 1'] = df_recomm.iloc[i]['Type 1']
-        dct['Generation'] = df_recomm.iloc[i]['Generation']
-        dct['Legendary'] = df_recomm.iloc[i]['Legendary'] -->
-        <hr>
+        <p>{{ pokemon['Name'] }} | {{ pokemon['Type 1'] }} | {{ pokemon['Generation'] }} | {{ pokemon['Legendary'] }} </p>
+    </div>
     {% endfor %}
+    <center>
+        <form action="http://localhost:5000/">
+            <input type="submit" value="Kembali"></input>
+        </form>
+    </center>
 </body>
 </html>

@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Your Pokemon</title>
 </head>
+<style>
+    body{
+        background-image: url("https://i.pinimg.com/originals/1c/a6/e1/1ca6e1c35e2d884230242cc0326dbf28.jpg");
+    }
+</style>
 <body>
     <center>
-        <form action="http://localhost:5000/hasil" method="POST">
-            <input type="text" name='pokemon' placeholder="Pokemon Favoritku...">
-            <input type="submit" value="Cari Pokemon"></input>
-        </form>
+        <div>
+            <!-- <h2>Mas</h2> -->
+            <img style="padding-top: 200px;" src="https://pluspng.com/img-png/pokemon-logo-png-pokemon-logo-png-2000.png" height="200" width="500">
+        </div>
     </center>
+    <div style="padding-top: 50px;">
+        <center>
+            <form action="http://localhost:5000/hasil" method="POST">
+                <input type="text" name='pokemon' placeholder="Pokemon Favoritku...">
+                <input type="submit" value="Cari Pokemon"></input>
+            </form>
+        </center>
+    </div>
 </body>
 </html>

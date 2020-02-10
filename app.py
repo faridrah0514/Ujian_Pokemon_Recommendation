@@ -48,9 +48,16 @@ def func2():
         print(recommendation)
         data_pokemon = api.json()
         gambar = data_pokemon['sprites']['front_default']
+        pokemon_favorit=recommendation[0]
         final_data = {
-            'nama_pokemon': data['pokemon'],
-            'gambar_pokemon': gambar
+            'Name': pokemon_favorit['Name'],
+            'Gambar': gambar,
+            'Type 1': pokemon_favorit['Type 1'],
+            'Generation': pokemon_favorit['Generation'],
+            'Legendary': pokemon_favorit['Legendary']
+    #             dct['Type 1'] = df_recomm.iloc[i]['Type 1']
+    # dct['Generation'] = df_recomm.iloc[i]['Generation']
+    # dct['Legendary'] = df_recomm.iloc[i]['Legendary']
         }
         return render_template(
             "result.html", 
