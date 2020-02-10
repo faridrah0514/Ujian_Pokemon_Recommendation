@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ini hasilnya loh ya -->
+    <h2>Pokemon Favorit Anda</h2>
+    hello {{ data['nama_pokemon'] }}
+    <br>
+    <!-- gambar {{ data['gambar_pokemon'] }} -->
+    <img src='{{ data['gambar_pokemon'] }}' alt="">
+    <h2>Rekomendasi Pokemon</h2>
+    {% for pokemon in df%}
+        <hr>
+        <img src={{ pokemon['Gambar'] }} alt="">
+        {{ pokemon['Name'] }}
+        <br>
+        {{ pokemon['Type 1'] }}
+        <br>
+        {{ pokemon['Generation'] }}
+        <br>
+        {{ pokemon['Legendary'] }}
+        <br>
+        <!-- dct['Name'] = df_recomm.iloc[i]['Name']
+        dct['Type 1'] = df_recomm.iloc[i]['Type 1']
+        dct['Generation'] = df_recomm.iloc[i]['Generation']
+        dct['Legendary'] = df_recomm.iloc[i]['Legendary'] -->
+        <hr>
+    {% endfor %}
+</body>
+</html>
