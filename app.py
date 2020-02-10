@@ -15,8 +15,18 @@ def find_pokemon_recommendation(name):
     pokemon_index_list = sorted(recom, key=lambda x:x[1], reverse=True)[0:10]
     idx = [i[0] for i in pokemon_index_list]
     df_recomm=df.iloc[idx][['Name', 'Type 1', 'Generation', 'Legendary']]
+    df_fav=df_recomm[df_recomm['Name'] == name]
+    df_fav = df_recomm[df_recomm['Name'] == pokemon_name]
+    df_recomm = df_recomm[df_recomm['Name'] != pokemon_name]
+    act={
+        'Name': df_fav['Name'].tolist()[0],
+        'Type 1': df_fav['Type 1'].tolist()[0],
+        'Generation': df_fav['Generation'].tolist()[0],
+        'Legendary': df_fav['Legendary'].tolist()[0],
+    }
     print(df_recomm)
-    lst=[]
+    ### pokemon favorit
+    lst=[act]
     url='https://pokeapi.co/api/v2/pokemon'
     for i in range(df_recomm.shape[0]):
         dct={}
@@ -35,7 +45,7 @@ def find_pokemon_recommendation(name):
         # print(df_recomm.iloc[i]['Name'])
         lst.append(dct)
     # return pd.DataFrame(lst)
-    return lst[:7]
+    return act, lst[:7]
 
 @app.route('/', methods=['POST', 'GET'])
 def func1():
@@ -50,23 +60,29 @@ def func2():
         data=data
         name_pok=data['pokemon'].lower()
         print(name_pok)
-        # url='https://pokeapi.co/api/v2/pokemon'
-        # api=requests.get(url+'/'+name_pok)
-        recommendation = find_pokemon_recommendation(name_pok)
+        try:
+            url='https://pokeapi.co/api/v2/pokemon'
+            api=requests.get(url+'/'+name_pok)
+            data_pokemon = api.json()
+            Gambar=data_pokemon['sprites']['front_default']
+        except:
+            return render_template('not_found.html')
+        act, recommendation = find_pokemon_recommendation(name_pok)
         print(recommendation)
-        # data_pokemon = api.json()
+        act['Gambar'] = Gambar
+        
         # gambar = data_pokemon['sprites']['front_default']
-        pokemon_favorit=recommendation[0]
-        final_data = {
-            'Name': pokemon_favorit['Name'],
-            'Gambar': pokemon_favorit['Gambar'],
-            'Type 1': pokemon_favorit['Type 1'],
-            'Generation': pokemon_favorit['Generation'],
-            'Legendary': pokemon_favorit['Legendary']
-        }
+        # pokemon_favorit=recommendation[0]
+        # final_data = {
+        #     'Name': pokemon_favorit['Name'],
+        #     'Gambar': pokemon_favorit['Gambar'],
+        #     'Type 1': pokemon_favorit['Type 1'],
+        #     'Generation': pokemon_favorit['Generation'],
+        #     'Legendary': pokemon_favorit['Legendary']
+        # }
         return render_template(
             "result.html", 
-            data=final_data, 
+            data=act, 
             df=recommendation[1:]
             )
     # except:
